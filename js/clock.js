@@ -6,7 +6,7 @@ clock.innerText = "00:00:00";
 function setClock() {
   const date = new Date();
   const year = String(date.getFullYear());
-  const month = String(date.getMonth()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   const date_of_week = date.getDay();
   const hours = String(date.getHours()).padStart(2, "0");
