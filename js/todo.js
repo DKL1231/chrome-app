@@ -1,6 +1,7 @@
 const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
+const toDoTitle = document.getElementById("todo-list-title");
 
 const TODOS_KEY = "todos";
 
@@ -15,24 +16,32 @@ function deleteTodo(event) {
   li.remove();
   toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
   saveToDos();
+  if (toDos.length === 0) {
+    toDoTitle.classList.add("hidden");
+  }
 }
 
 function paintToDo(newTodoObj) {
-  const li = document.createElement("li");
+  const li = document.createElement("ul");
   li.id = newTodoObj.id;
   const span = document.createElement("span");
-  span.innerText = newTodoObj.text;
+  span.innerText = `  ${newTodoObj.text}`;
   const button = document.createElement("button");
   button.innerText = "X";
   button.addEventListener("click", deleteTodo);
-  li.appendChild(span);
   li.appendChild(button);
+  li.appendChild(span);
 
   toDoList.appendChild(li);
 }
 
 function handleToDoSubmit(event) {
   event.preventDefault();
+  if (toDos.length == 7) {
+    alert("To-Do List is maximum 7. Delete To-Do and Try Again.");
+    return;
+  }
+  toDoTitle.classList.remove("hidden");
   const newTodo = toDoInput.value;
   toDoInput.value = "";
   const newTodoObj = {
@@ -43,6 +52,9 @@ function handleToDoSubmit(event) {
   paintToDo(newTodoObj);
   saveToDos();
 }
+if (toDos.length === 0) {
+  toDoTitle.classList.add("hidden");
+}
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
@@ -52,4 +64,7 @@ if (savedToDos !== null) {
   const parsedToDos = JSON.parse(savedToDos);
   toDos = parsedToDos;
   parsedToDos.forEach(paintToDo);
+  toDoTitle.classList.remove("hidden");
+} else {
+  toDoTitle.classList.add("hidden");
 }
