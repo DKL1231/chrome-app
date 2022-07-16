@@ -34,5 +34,4 @@ if (savedUsername === null) {
   todo_form.classList.remove(HIDDEN_CLASSNAME);
   todo_list.classList.remove(HIDDEN_CLASSNAME);
   todo_list_title.classList.remove(HIDDEN_CLASSNAME);
-  console.log(todo_list_title.classList);
 }
