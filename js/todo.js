@@ -52,9 +52,6 @@ function handleToDoSubmit(event) {
   paintToDo(newTodoObj);
   saveToDos();
 }
-if (toDos.length === 0) {
-  toDoTitle.classList.add("hidden");
-}
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
@@ -66,5 +63,9 @@ if (savedToDos !== null) {
   parsedToDos.forEach(paintToDo);
   toDoTitle.classList.remove("hidden");
 } else {
+  toDoTitle.classList.add("hidden");
+}
+
+if (toDos.length === 0) {
   toDoTitle.classList.add("hidden");
 }
